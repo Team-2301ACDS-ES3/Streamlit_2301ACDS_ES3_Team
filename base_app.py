@@ -27,6 +27,23 @@ import joblib,os
 
 # Data dependencies
 import pandas as pd
+import string
+from pathlib import Path
+
+# Importing markdowns
+def read_markdown_file(markdown_file):
+	return Path(markdown_file).read_text()
+
+# Text cleaning
+def data_clean(text):
+	# convert to lower case
+	text = text.lower()
+	# remove '@' and '#' signs
+	text = text.replace('@','').replace('#','')
+	# remove punctuations
+	clean_text = text.translate(str.maketrans('','',string.punctuation))
+	
+	return clean_text
 
 # Vectorizer
 news_vectorizer = open("resources/tfidfvect.pkl","rb")
@@ -41,16 +58,26 @@ def main():
 
 	# Creates a main title and subheader on your page -
 	# these are static across all pages
-	st.title("Tweet Classifer")
-	st.subheader("Climate change tweet classification")
+	st.title("Tweet Classifier")
+	st.subheader("A Climate change tweet classifier")
 
 	# Creating sidebar with selection box -
 	# you can create multiple pages this way
-	options = ["Prediction", "Information"]
+	options = ["Home", "Information", "Prediction", "About us"]
 	selection = st.sidebar.selectbox("Choose Option", options)
+
+	# Building out the "Home" page
+	if selection == "Home":
+		st.image('resources/imgs/climate_01.jpg', width = 700)
+		st.subheader("Welcome to the Tweet Classifier. The Climate change tweet classification interactive app")
+		st.subheader("brought to you by ``COMBIS Tech``")
+		st.write("Hint: Explore through the side bar")
 
 	# Building out the "Information" page
 	if selection == "Information":
+		options = ["General Information", "Exploratory Data Analysis", "Model Information"]
+		selection = st.sidebar.selectbox("Choose Option", options)
+
 		st.info("General Information")
 		# You can read a markdown file from supporting resources folder
 		st.markdown("Some information here")
