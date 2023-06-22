@@ -22,6 +22,7 @@
 
 """
 # Streamlit dependencies
+from turtle import width
 import streamlit as st
 import joblib,os
 
@@ -41,9 +42,9 @@ def data_clean(text):
 	# remove '@' and '#' signs
 	text = text.replace('@','').replace('#','')
 	# remove punctuations
-	clean_text = text.translate(str.maketrans('','',string.punctuation))
+	new_text = text.translate(str.maketrans('','',string.punctuation))
 	
-	return clean_text
+	return new_text
 
 # Vectorizer
 news_vectorizer = open("resources/tfidfvect.pkl","rb")
@@ -78,32 +79,217 @@ def main():
 		options = ["General Information", "Exploratory Data Analysis", "Model Information"]
 		selection = st.sidebar.selectbox("Choose Option", options)
 
-		st.info("General Information")
-		# You can read a markdown file from supporting resources folder
-		st.markdown("Some information here")
+		if selection == "General Information":
+			st.info("General Information")
+			# You can read a markdown file from supporting resources folder
+			info_markdown = read_markdown_file("resources/info.md")
+			st.markdown(info_markdown)
 
-		st.subheader("Raw Twitter data and label")
-		if st.checkbox('Show raw data'): # data is hidden if box is unchecked
-			st.write(raw[['sentiment', 'message']]) # will write the df to the page
+			st.subheader("Raw Twitter data and label")
+			if st.checkbox('Show raw data'): # data is hidden if box is unchecked
+				st.write(raw[['sentiment', 'message']]) # will write the df to the page
+		
+		if selection == "Exploratory Data Analysis":
+			st.info("Exploratory Data Analysis")
+			# Building out the EDA page
+			st.subheader("Visual insight from the given data")
+			st.image('resources/imgs/EDA_01.png', width = 700)
+			st.write("Over 8,000 tweets were 'Pro', compared to the slightly above 1,000 'Anti' sentiments")
+			st.subheader("")# creating space between the texts and images
+			st.subheader("")
+
+			st.image('resources/imgs/EDA_02.png', width = 700)
+			st.write("Here the Pie chart shows that more than half of the tweet(53.9%) support the belief that climate change is man made")
+			st.subheader("")# creating space between the texts and images
+			st.subheader("")
+
+			st.image('resources/imgs/EDA_03.png', width = 700)
+			st.write("The wordcloud image shows the most occurring words in the data set")
+			st.write("Climate change and Global warming are the most used with different beliefs")
+			st.subheader("")# creating space between the texts and images
+			st.subheader("")
+
+			st.image('resources/imgs/EDA_04.png', width = 800)
+			st.write("The wordcloud image here shows the most occurring words in each sentiment class")
+			st.write("The visuals demonstrates the accuracy of the data source")
+			st.subheader("")# creating space between the texts and images
+			st.subheader("")
+
+		if selection == "Model Information":
+			st.info("Model Information")
+			# You can read a markdown file from supporting resources folder
+			info_markdown = read_markdown_file("resources/info.md")
+			st.markdown(info_markdown)
 
 	# Building out the predication page
 	if selection == "Prediction":
-		st.info("Prediction with ML Models")
-		# Creating a text box for user input
-		tweet_text = st.text_area("Enter Text","Type Here")
+		options = ["Logistic Regression", "Support Vector Machines", "Naive Bayes", "Random Forest", "K-Nearest Neighbours"]
+		selection = st.sidebar.selectbox("Choose a Model", options)
 
-		if st.button("Classify"):
-			# Transforming user input with vectorizer
-			vect_text = tweet_cv.transform([tweet_text]).toarray()
-			# Load your .pkl file with the model of your choice + make predictions
-			# Try loading in multiple models to give the user a choice
-			predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
-			prediction = predictor.predict(vect_text)
+		if selection == "Logistic Regression":
+			st.info("Prediction with Logistic Regression")
+			# Creating a text box for user input
+			tweet_text = st.text_area("Enter Text","Type Here")
 
-			# When model has successfully run, will print prediction
-			# You can use a dictionary or similar structure to make this output
-			# more human interpretable.
-			st.success("Text Categorized as: {}".format(prediction))
+			if st.button("Classify"):
+				# cleaning user input
+				clean_text = data_clean(tweet_text)
+
+				# Transforming user input with vectorizer
+				vect_text = tweet_cv.transform([clean_text]).toarray()
+
+				# Load your .pkl file with the model of your choice + make predictions
+				# Try loading in multiple models to give the user a choice
+				predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
+				prediction = predictor.predict(vect_text)
+
+				# When model has successfully run, will print prediction
+				# You can use a dictionary or similar structure to make this output
+				# more human interpretable.
+				if prediction == [2]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  News:newspaper:".format(prediction))
+				
+				if prediction == [1]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Pro:white_check_mark:".format(prediction))
+				
+				if prediction == [0]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Neutral:neutral_face:".format(prediction))
+				
+				if prediction == [-1]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Anti:x:".format(prediction))
+
+		if selection == "Support Vector Machines":
+			st.info("Prediction with Support Vector Machines")
+			# Creating a text box for user input
+			tweet_text = st.text_area("Enter Text","Type Here")
+
+			if st.button("Classify"):
+				# cleaning user input
+				clean_text = data_clean(tweet_text)
+
+				# Transforming user input with vectorizer
+				vect_text = tweet_cv.transform([clean_text]).toarray()
+
+				# Load your .pkl file with the model of your choice + make predictions
+				# Try loading in multiple models to give the user a choice
+				predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
+				prediction = predictor.predict(vect_text)
+
+				# When model has successfully run, will print prediction
+				# You can use a dictionary or similar structure to make this output
+				# more human interpretable.
+				if prediction == [2]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  News:newspaper:".format(prediction))
+				
+				if prediction == [1]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Pro:white_check_mark:".format(prediction))
+				
+				if prediction == [0]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Neutral:neutral_face:".format(prediction))
+				
+				if prediction == [-1]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Anti:x:".format(prediction))
+		
+		if selection == "Naive Bayes":
+			st.info("Prediction with Naive Bayes")
+			# Creating a text box for user input
+			tweet_text = st.text_area("Enter Text","Type Here")
+
+			if st.button("Classify"):
+				# cleaning user input
+				clean_text = data_clean(tweet_text)
+
+				# Transforming user input with vectorizer
+				vect_text = tweet_cv.transform([clean_text]).toarray()
+
+				# Load your .pkl file with the model of your choice + make predictions
+				# Try loading in multiple models to give the user a choice
+				predictor = joblib.load(open(os.path.join("resources/Naive_bayes.pkl"),"rb"))
+				prediction = predictor.predict(vect_text)
+
+				# When model has successfully run, will print prediction
+				# You can use a dictionary or similar structure to make this output
+				# more human interpretable.
+				if prediction == [2]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  News:newspaper:".format(prediction))
+				
+				if prediction == [1]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Pro:white_check_mark:".format(prediction))
+				
+				if prediction == [0]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Neutral:neutral_face:".format(prediction))
+				
+				if prediction == [-1]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Anti:x:".format(prediction))
+
+		if selection == "Random Forest":
+			st.info("Prediction with Random Forest")
+			# Creating a text box for user input
+			tweet_text = st.text_area("Enter Text","Type Here")
+
+			if st.button("Classify"):
+				# cleaning user input
+				clean_text = data_clean(tweet_text)
+
+				# Transforming user input with vectorizer
+				vect_text = tweet_cv.transform([clean_text]).toarray()
+
+				# Load your .pkl file with the model of your choice + make predictions
+				# Try loading in multiple models to give the user a choice
+				predictor = joblib.load(open(os.path.join("resources/Naive_bayes.pkl"),"rb"))
+				prediction = predictor.predict(vect_text)
+
+				# When model has successfully run, will print prediction
+				# You can use a dictionary or similar structure to make this output
+				# more human interpretable.
+				if prediction == [2]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  News:newspaper:".format(prediction))
+				
+				if prediction == [1]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Pro:white_check_mark:".format(prediction))
+				
+				if prediction == [0]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Neutral:neutral_face:".format(prediction))
+				
+				if prediction == [-1]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Anti:x:".format(prediction))
+
+		if selection == "K-Nearest Neighbours":
+			st.info("Prediction with K-Nearest Neighbours")
+			# Creating a text box for user input
+			tweet_text = st.text_area("Enter Text","Type Here")
+
+			if st.button("Classify"):
+				# cleaning user input
+				clean_text = data_clean(tweet_text)
+
+				# Transforming user input with vectorizer
+				vect_text = tweet_cv.transform([clean_text]).toarray()
+
+				# Load your .pkl file with the model of your choice + make predictions
+				# Try loading in multiple models to give the user a choice
+				predictor = joblib.load(open(os.path.join("resources/Naive_bayes.pkl"),"rb"))
+				prediction = predictor.predict(vect_text)
+
+				# When model has successfully run, will print prediction
+				# You can use a dictionary or similar structure to make this output
+				# more human interpretable.
+				if prediction == [2]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  News:newspaper:".format(prediction))
+				
+				if prediction == [1]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Pro:white_check_mark:".format(prediction))
+				
+				if prediction == [0]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Neutral:neutral_face:".format(prediction))
+				
+				if prediction == [-1]:
+					st.success("Text Categorized as: {}  :left_right_arrow:  Anti:x:".format(prediction))
+
+	# Building out the 'About us' page
+	if selection == "About us":
+			st.info("About Us")
+							
 
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
