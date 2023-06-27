@@ -22,7 +22,6 @@
 
 """
 # Streamlit dependencies
-from turtle import width
 import streamlit as st
 import joblib,os
 
@@ -59,7 +58,7 @@ def main():
 
 	# Creates a main title and subheader on your page -
 	# these are static across all pages
-	st.title("Tweet Classifier")
+	st.title("COMBIS Classifier")
 	st.subheader("A Climate change tweet classifier")
 
 	# Creating sidebar with selection box -
@@ -71,7 +70,7 @@ def main():
 	if selection == "Home":
 		st.image('resources/imgs/climate_01.jpg', width = 700)
 		st.subheader("Welcome to the Tweet Classifier. The Climate change tweet classification interactive app")
-		st.subheader("brought to you by ``COMBIS Tech``")
+		st.subheader("brought to you by ``COMBIS Tech``:registered:")
 		st.write("Hint: Explore through the side bar")
 
 	# Building out the "Information" page
@@ -118,7 +117,7 @@ def main():
 		if selection == "Model Information":
 			st.info("Model Information")
 			# You can read a markdown file from supporting resources folder
-			info_markdown = read_markdown_file("resources/info.md")
+			info_markdown = read_markdown_file("resources/models.md")
 			st.markdown(info_markdown)
 
 	# Building out the predication page
@@ -172,7 +171,7 @@ def main():
 
 				# Load your .pkl file with the model of your choice + make predictions
 				# Try loading in multiple models to give the user a choice
-				predictor = joblib.load(open(os.path.join("resources/Logistic_regression.pkl"),"rb"))
+				predictor = joblib.load(open(os.path.join("resources/SVM.pkl"),"rb"))
 				prediction = predictor.predict(vect_text)
 
 				# When model has successfully run, will print prediction
@@ -204,7 +203,7 @@ def main():
 
 				# Load your .pkl file with the model of your choice + make predictions
 				# Try loading in multiple models to give the user a choice
-				predictor = joblib.load(open(os.path.join("resources/Naive_bayes.pkl"),"rb"))
+				predictor = joblib.load(open(os.path.join("resources/naive_bayes.pkl"),"rb"))
 				prediction = predictor.predict(vect_text)
 
 				# When model has successfully run, will print prediction
@@ -236,7 +235,7 @@ def main():
 
 				# Load your .pkl file with the model of your choice + make predictions
 				# Try loading in multiple models to give the user a choice
-				predictor = joblib.load(open(os.path.join("resources/Naive_bayes.pkl"),"rb"))
+				predictor = joblib.load(open(os.path.join("resources/forest.pkl"),"rb"))
 				prediction = predictor.predict(vect_text)
 
 				# When model has successfully run, will print prediction
@@ -268,7 +267,7 @@ def main():
 
 				# Load your .pkl file with the model of your choice + make predictions
 				# Try loading in multiple models to give the user a choice
-				predictor = joblib.load(open(os.path.join("resources/Naive_bayes.pkl"),"rb"))
+				predictor = joblib.load(open(os.path.join("resources/knn.pkl"),"rb"))
 				prediction = predictor.predict(vect_text)
 
 				# When model has successfully run, will print prediction
@@ -289,7 +288,55 @@ def main():
 	# Building out the 'About us' page
 	if selection == "About us":
 			st.info("About Us")
-							
+			# Building out the 'about us' page
+			st.image('resources/imgs/tech_team_01.jpg', width= 700)
+			st.subheader("`Mission Statement:`:page_with_curl::page_with_curl:")
+			st.subheader("At COMBIS Tech:registered:, we specialize in transforming challenges into\
+						growth opportunities. With a focus on innovation and expertise, we help\
+						companies thrive in today's dynamic business landscape. Harnessing the\
+						power of advanced technology and data-driven insights, we provide tailored\
+						solutions that drive remarkable results.")
+			st.subheader("We pride ourselves in applying the latest technology to provide actionable intel,\
+						in turn helping businesses to grow and nurture a consumer-first mindset.")
+			st.subheader("   ")# just a way to create space between texts
+			st.subheader("   ")
+			st.subheader("`Meet The Team:`:male-technologist::female-factory-worker:")
+
+			st.subheader("   ")
+			# First Member
+			st.image('resources/imgs/Mati.jpeg', width = 300)
+			st.subheader('Mmatlou Matlakala')
+			st.write('`Data Scientist`', '`Team Lead`')
+			
+			st.subheader("   ")
+			# Second Member
+			st.image('resources/imgs/Buchi.jpeg', width = 300)
+			st.subheader('Onyebuchi Madubuko')
+			st.write('`Data Scientist`', '`Tech Lead`')
+
+			st.subheader("   ")
+			# Third Member
+			st.image('resources/imgs/Sumaya.jpeg', width = 300)
+			st.subheader('Sumaya Hassan')
+			st.write('`Data Scientist`', '`Admin Lead`')
+
+			st.subheader("   ")
+			# Fourth Member
+			st.image('resources/imgs/Cinta.jpeg', width = 300)
+			st.subheader('Jacinta Muindi')
+			st.write('`Data Scientist`', '`Product Lead`')
+
+			st.subheader("   ")
+			# Fifth Member
+			st.image('resources/imgs/Bolanle.jpeg', width = 300)
+			st.subheader('Ipaye Bolanle Moshood')
+			st.write('`Data Scientist`', '`PR Lead`')
+
+			st.subheader("   ")
+			# Sixth Member
+			st.image('resources/imgs/Omolaja.jpeg', width = 300)
+			st.subheader('Omalaja Adodo')
+			st.write('`Data Scientist`')
 
 # Required to let Streamlit instantiate our web app.  
 if __name__ == '__main__':
