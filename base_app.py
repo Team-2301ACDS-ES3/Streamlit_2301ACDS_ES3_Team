@@ -70,7 +70,9 @@ def main():
 	if selection == "Home":
 		st.image('resources/imgs/climate_01.jpg', width = 700)
 		st.subheader("Welcome to the Tweet Classifier. The Climate change tweet classification interactive app")
-		st.subheader("brought to you by ``COMBIS Tech``:registered:")
+		st.subheader("brought to you by ``COMBIS Analytics``:registered:")
+		info_markdown = read_markdown_file("resources/home.md")
+		st.markdown(info_markdown)
 		st.write("Hint: Explore through the side bar")
 
 	# Building out the "Information" page
@@ -127,6 +129,12 @@ def main():
 
 		if selection == "Logistic Regression":
 			st.info("Prediction with Logistic Regression")
+			st.write("Hello Earth! We will heal: ``Text Categorized as: [0] ↔️ Neutral😐``")
+			st.write("Climate change is man made: ``Text Categorized as: [1] ↔️ Pro✅``")
+			st.write("It is a wrong narrative to suggest that global warming is man made: ``Text Categorized as: [-1] ↔️ Anti❌``")
+			st.write("Weather report for Miami this morning suggests a rainy day: ``Text Categorized as: [2] ↔️ News📰``")
+			st.subheader("")
+			st.subheader("")
 			# Creating a text box for user input
 			tweet_text = st.text_area("Enter Text","Type Here")
 
@@ -159,6 +167,13 @@ def main():
 
 		if selection == "Support Vector Machines":
 			st.info("Prediction with Support Vector Machines")
+			st.info("Prediction with Logistic Regression")
+			st.write("Hello Earth! We will heal: ``Text Categorized as: [0] ↔️ Neutral😐``")
+			st.write("Climate change is man made: ``Text Categorized as: [1] ↔️ Pro✅``")
+			st.write("It is a wrong narrative to suggest that global warming is man made: ``Text Categorized as: [-1] ↔️ Anti❌``")
+			st.write("Weather report for Miami this morning suggests a rainy day: ``Text Categorized as: [2] ↔️ News📰``")
+			st.subheader("")
+			st.subheader("")
 			# Creating a text box for user input
 			tweet_text = st.text_area("Enter Text","Type Here")
 
@@ -191,6 +206,13 @@ def main():
 		
 		if selection == "Naive Bayes":
 			st.info("Prediction with Naive Bayes")
+			st.info("Prediction with Logistic Regression")
+			st.write("Hello Earth! We will heal: ``Text Categorized as: [0] ↔️ Neutral😐``")
+			st.write("Climate change is man made: ``Text Categorized as: [1] ↔️ Pro✅``")
+			st.write("It is a wrong narrative to suggest that global warming is man made: ``Text Categorized as: [-1] ↔️ Anti❌``")
+			st.write("Weather report for Miami this morning suggests a rainy day: ``Text Categorized as: [2] ↔️ News📰``")
+			st.subheader("")
+			st.subheader("")
 			# Creating a text box for user input
 			tweet_text = st.text_area("Enter Text","Type Here")
 
@@ -223,6 +245,13 @@ def main():
 
 		if selection == "Random Forest":
 			st.info("Prediction with Random Forest")
+			st.info("Prediction with Logistic Regression")
+			st.write("Hello Earth! We will heal: ``Text Categorized as: [0] ↔️ Neutral😐``")
+			st.write("Climate change is man made: ``Text Categorized as: [1] ↔️ Pro✅``")
+			st.write("It is a wrong narrative to suggest that global warming is man made: ``Text Categorized as: [-1] ↔️ Anti❌``")
+			st.write("Weather report for Miami this morning suggests a rainy day: ``Text Categorized as: [2] ↔️ News📰``")
+			st.subheader("")
+			st.subheader("")
 			# Creating a text box for user input
 			tweet_text = st.text_area("Enter Text","Type Here")
 
@@ -255,6 +284,13 @@ def main():
 
 		if selection == "K-Nearest Neighbours":
 			st.info("Prediction with K-Nearest Neighbours")
+			st.info("Prediction with Logistic Regression")
+			st.write("Hello Earth! We will heal: ``Text Categorized as: [0] ↔️ Neutral😐``")
+			st.write("Climate change is man made: ``Text Categorized as: [1] ↔️ Pro✅``")
+			st.write("It is a wrong narrative to suggest that global warming is man made: ``Text Categorized as: [-1] ↔️ Anti❌``")
+			st.write("Weather report for Miami this morning suggests a rainy day: ``Text Categorized as: [2] ↔️ News📰``")
+			st.subheader("")
+			st.subheader("")
 			# Creating a text box for user input
 			tweet_text = st.text_area("Enter Text","Type Here")
 
@@ -306,31 +342,31 @@ def main():
 			# First Member
 			st.image('resources/imgs/Mati.jpeg', width = 300)
 			st.subheader('Mmatlou Matlakala')
-			st.write('`Data Scientist`', '`Team Lead`')
+			st.write('`Data Scientist:`', '`Team Lead`')
 			
 			st.subheader("   ")
 			# Second Member
 			st.image('resources/imgs/Buchi.jpeg', width = 300)
 			st.subheader('Onyebuchi Madubuko')
-			st.write('`Data Scientist`', '`Tech Lead`')
+			st.write('`Data Scientist:`', '`Tech Lead`')
 
 			st.subheader("   ")
 			# Third Member
 			st.image('resources/imgs/Sumaya.jpeg', width = 300)
 			st.subheader('Sumaya Hassan')
-			st.write('`Data Scientist`', '`Admin Lead`')
+			st.write('`Data Scientist:`', '`Admin Lead`')
 
 			st.subheader("   ")
 			# Fourth Member
 			st.image('resources/imgs/Cinta.jpeg', width = 300)
 			st.subheader('Jacinta Muindi')
-			st.write('`Data Scientist`', '`Product Lead`')
+			st.write('`Data Scientist:`', '`Product Lead`')
 
 			st.subheader("   ")
 			# Fifth Member
 			st.image('resources/imgs/Bolanle.jpeg', width = 300)
 			st.subheader('Ipaye Bolanle Moshood')
-			st.write('`Data Scientist`', '`PR Lead`')
+			st.write('`Data Scientist:`', '`PR Lead`')
 
 			st.subheader("   ")
 			# Sixth Member
